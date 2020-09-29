@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://imagen para godot/roca.png" type="Texture" id=1]
+[ext_resource path="res://Roca.gd" type="Script" id=2]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "roca",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 23.0431
+height = 2.6373
+
+[node name="Roca" type="RigidBody2D"]
+position = Vector2( 49.6578, 30.9785 )
+collision_layer = 0
+gravity_scale = 0.0
+script = ExtResource( 2 )
+velocidadMinima = 150
+velocidadMaxima = 250
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 3.46359, 6.01183 )
+scale = Vector2( 0.157957, 0.161384 )
+frames = SubResource( 1 )
+animation = "roca"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 3.71545, 4.69244 )
+shape = SubResource( 2 )
+
+[node name="Visibilidad" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 4.11125, 3.90168 )
+__meta__ = {
+"_edit_group_": true
+}
+[connection signal="screen_exited" from="Visibilidad" to="." method="_on_Visibilidad_screen_exited"]

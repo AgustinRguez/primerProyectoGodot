@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://imagen para godot/volarAtras.png" type="Texture" id=2]
+[ext_resource path="res://imagen para godot/volarAdelante.png" type="Texture" id=3]
+[ext_resource path="res://imagen para godot/AdelanteSinFondo.png" type="Texture" id=4]
+[ext_resource path="res://imagen para godot/volar.png" type="Texture" id=6]
+[ext_resource path="res://Player.gd" type="Script" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "Frente",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Adelante",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), null ],
+"loop": true,
+"name": "Atras",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "AdelanteSinFondo",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 32.5008
+height = 10.4847
+
+[node name="Player" type="Area2D"]
+position = Vector2( 483.056, 254.056 )
+script = ExtResource( 7 )
+velocidad = 400
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 23.3471, 22.2769 )
+scale = Vector2( 1.6742, 1.50824 )
+frames = SubResource( 1 )
+animation = "Frente"
+playing = true
+offset = Vector2( -2.79785, 2.26697 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 17.4614, 20.4378 )
+shape = SubResource( 2 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
